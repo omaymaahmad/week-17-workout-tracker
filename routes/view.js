@@ -1,7 +1,7 @@
 //require in the router
 const router = require("express").Router();
 //require in the path npm package
-const router = require("mongoose").Router();
+const path = require("path");
 //get require which is going to return the exercise.html when the user visits /exercise
 app.get('/', (req, res) => 
 res.sendFile(path.join(__dirname, '../public/exercise.html'))
