@@ -37,5 +37,6 @@ router.get("/api/workout", (req,res) => {
     });
 })
 //dete request to delete a workout
+router.delete("/api/workout", )
 //exports the router
 module.exports = router;
