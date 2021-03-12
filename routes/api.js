@@ -28,6 +28,14 @@ router.get("/api/workout", (req, res) => {
     });
 })
 //get request to get a range of workouts out of the database
+router.get("/api/workout", (req,res) => {
+    Workout.findAll().then(dbWorkout => {
+        res.json(dbWorkout);
+    })
+    .catch(err => {
+        res.status(400).json(err);
+    });
+})
 //dete request to delete a workout
 //exports the router
 module.exports = router;
