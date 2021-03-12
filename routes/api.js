@@ -13,11 +13,16 @@ router.post("/api/workouts",(req, res) => {
  });
 });
 //put request to update a workout
-router.put("/api/workouts/:id", function(req, res) {
-    db.Workout.updateOne({_id: req.params._id}, {rating: req.body.rating}).then(function(dbWorkout){
-        res.json(dbWorkout);
+router.put("/api/workouts/:id", ({body, params}, res) =>{
+   Workout.findByIdAndUpdate(params.id, { $push: {exercises: body}},
+    {new: true, runValidators: true}).then(workoutAdded => {
+        res.json(workoutAdded);
+    })
+    .catch(err => {
+        res.status(400).json(err);
     });
 });
+
 //get request to get workouts out of database
 router.get("/api/workouts", (req, res) => {
     Workout.findOne().then(dbWorkout => { 
