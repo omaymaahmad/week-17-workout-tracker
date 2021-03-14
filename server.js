@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 
 //Initialise PORT variable
 
-const PORT = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 3030; 
 
 //Initialise Express Application
 const app = express(); 

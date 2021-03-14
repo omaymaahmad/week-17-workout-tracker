@@ -25,7 +25,17 @@ router.put("/api/workouts/:id", ({body, params}, res) =>{
 
 //get request to get workouts out of database
 router.get("/api/workouts", (req, res) => {
-    Workout.findOne().then(dbWorkout => { 
+    Workout.aggregate([
+        {
+            $addFields: {
+                totalDuration: {
+                    $sum: "$exercises.duration"
+                }
+            }
+        }
+    ])
+    .then(dbWorkout => { 
+        console.log(dbWorkout)
         res.json(dbWorkout);
     })
     .catch(err => {
@@ -33,7 +43,7 @@ router.get("/api/workouts", (req, res) => {
     });
 })
 //get request to get a range of workouts out of the database
-router.get("/api/workouts", (req,res) => {
+router.get("/api/workouts/range", (req,res) => {
     Workout.findAll().then(dbWorkout => {
         res.json(dbWorkout);
     })
@@ -41,7 +51,6 @@ router.get("/api/workouts", (req,res) => {
         res.status(400).json(err);
     });
 })
-//dete request to delete a workout
-router.delete("/api/workout", )
+
 //exports the router
 module.exports = router;
