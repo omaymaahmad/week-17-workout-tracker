@@ -42,4 +42,4 @@ This assignment will require you to create Mongo database with a Mongoose schema
 
 ## Screenshot of Application
 
-![Fitness-Tracker](./Assets/Fitness-Tracker)
+![Fitness-Tracker](./Assets/Fitness-Tracker.png)
