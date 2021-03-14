@@ -43,8 +43,18 @@ router.get("/api/workouts", (req, res) => {
     });
 })
 //get request to get a range of workouts out of the database
-router.get("/api/workouts/range", (req,res) => {
-    Workout.findAll().then(dbWorkout => {
+router.get("/api/workouts/range", (req, res) => {
+    Workout.aggregate([
+        {
+            $addFields: {
+                totalDuration: {
+                    $sum: "$exercises.duration"
+                }
+            }
+        }
+    ])
+    .limit(7).then(dbWorkout => { 
+        console.log(dbWorkout)
         res.json(dbWorkout);
     })
     .catch(err => {
